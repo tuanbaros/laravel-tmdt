@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $faker = Faker\Factory::create();
+    $name = $faker->name;
+    return view('welcome', compact('name'));
 });

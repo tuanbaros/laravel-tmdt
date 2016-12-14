@@ -95,6 +95,6 @@
     </body>
     <script src="{{ asset('/bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
-        swal('Hello Baby :v')
+        swal('Hello {{ $name }} :v')
     </script>
 </html>
