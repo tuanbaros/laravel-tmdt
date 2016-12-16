@@ -9,7 +9,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/bower_components/sweetalert2/dist/sweetalert2.min.css') }}">
 
         <!-- Styles -->
         <style>
@@ -69,12 +68,8 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
+                    <a href="{{ url('/login') }}">Login</a>
+                    <a href="{{ url('/register') }}">Register</a>
                 </div>
             @endif
 
@@ -93,8 +88,4 @@
             </div>
         </div>
     </body>
-    <script src="{{ asset('/bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    <script>
-        swal('Hello {{ $name }} :v')
-    </script>
 </html>
