@@ -10,40 +10,34 @@
     <title>Login Admin</title>
 
     <!-- Bootstrap -->
-    <link href="admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="admin/css/custom.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/build/css/custom.min.css') }}" rel="stylesheet">
 </head>
-
-<body style="background:#F7F7F7;">
-<div class="">
-    <div id="wrapper">
-        <div id="login" class=" form">
-            <section class="login_content">
-                <form action="loginadmin" method="post">
-                    <h1>Login Admin</h1>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Username" required />
-                    </div>
-                    <div>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required />
-                    </div>
-                    <div>
-                        <input type="submit" value="Log in" class="btn btn-default submit">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="separator">
-                        <div class="clearfix"></div>
-                        <br />
-                    </div>
-                </form>
-            </section>
-        </div>
+<body class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form action="loginadmin" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <h1>Login Form</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Username" name="username" id="username" required="" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="" />
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-default">Login</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+      </div>
     </div>
-</div>
 </body>
 </html>

@@ -71,3 +71,11 @@
 </div>
 <!-- /.row -->
 @endsection
+
+@section('script')
+    <script src="{{ asset('/js/dttable.js') }}"></script>
+    <script>
+        var dttable = new dttable();
+        dttable.init('#dataTables');
+    </script>
+@endsection
