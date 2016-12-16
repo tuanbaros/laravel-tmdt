@@ -7,23 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin </title>
+    <title>Admin</title>
 
     <!-- Bootstrap -->
-    <link href="admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- iCheck -->
-    <link href="admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- jVectorMap -->
-    <link href="admin/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
+    <link href="{{ asset('bower_components/gentelella/production/css/maps/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="admin/css/custom.css" rel="stylesheet">
-    <!-- ckeditor -->
-    <script language="javascript" src="ckeditor/ckeditor.js" type="text/javascript"></script>
+    <link href="{{ asset('bower_components/gentelella/build/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/bower_components/datatables.net-dt/css/jquery.dataTables.min.css') }}">
+
+    @yield('style')
 
 </head>
 
@@ -41,7 +42,7 @@
                 <!-- menu profile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="admin/images/user.png" alt="..." class="img-circle profile_img">
+                        <img src="{{ asset('bower_components/gentelella/production/images/user.png') }}" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -125,7 +126,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="admin/images/user.png" alt="">Manager
+                                <img src="{{ asset('bower_components/gentelella/production/images/user.png') }}" alt="">Manager
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -196,20 +197,27 @@
 </div>
 
 <!-- jQuery -->
-<script src="admin/vendors/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
-<script src="admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
-<script src="admin/vendors/fastclick/lib/fastclick.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/fastclick/lib/fastclick.js') }}"></script>
 <!-- NProgress -->
-<script src="admin/vendors/nprogress/nprogress.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/nprogress/nprogress.js') }}"></script>
 <!-- bootstrap-progressbar -->
-<script src="admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
 <!-- iCheck -->
-<script src="admin/vendors/iCheck/icheck.min.js"></script>
+<script src="{{ asset('bower_components/gentelella/vendors/iCheck/icheck.min.js') }}"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="admin/js/custom.js"></script>
+<script src="{{ asset('bower_components/gentelella/build/js/custom.js') }}"></script>
+
+<script src="{{ asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+
+<!-- ckeditor -->
+<script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
+
+@yield('script')
 
 </body>
 </html>
