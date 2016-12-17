@@ -19,14 +19,14 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');*/
 
-Route::get('test', function (){
+Route::get('test', function () {
     App\CustomerReview::create(['book_id'=>'1', 'user_id'=>'1', 'content'=>'dfsdf fsf sfds']);
     return App\User::first()->customerReviews;
 });
 
 
 //
-Route::get('manager',function(){
+Route::get('manager',function() {
     if (!Session::has('loginadmin')) {
         return Redirect::to('loginadmin');
     }
@@ -34,21 +34,22 @@ Route::get('manager',function(){
 });
 
 // login and logout admin
-Route::get('loginadmin',function(){
+Route::get('loginadmin',function() {
     if(!Session::has('loginadmin')){
         return view('admin.LogInAdmin');
     }
     return redirect('manager');
 });
+
 use \Illuminate\Support\Facades\Input;
-Route::post('loginadmin',function(){
-    if (Input::get('username')=="admin"&&Input::get('password')=="admin") {
+Route::post('loginadmin',function() {
+    if (Input::get('username')=="admin" && Input::get('password')=="admin") {
         Session::put('loginadmin', 'ok');
         return Redirect::to('manager');
     }
     return view('admin.LogInAdmin');
 });
-Route::get('login.html', function(){
+Route::get('login.html', function() {
     Session::forget('loginadmin');
     return Redirect::to('loginadmin');
 });
