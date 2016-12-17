@@ -15,8 +15,8 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('cart_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('cart_id')->unsigned();
             $table->string('status')->nullable();
             $table->string('name_customer')->nullable();
             $table->string('phone')->nullable();

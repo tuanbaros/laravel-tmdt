@@ -15,8 +15,8 @@ class CreateCustomerReviewsTable extends Migration
     {
         Schema::create('customer_reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('book_id')->nullable();
-            $table->integer('user_id');
+            $table->integer('book_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
             $table->text('content');
             $table->timestamps();
         });
