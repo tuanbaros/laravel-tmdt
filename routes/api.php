@@ -14,10 +14,28 @@ use App\Book;
 |
 */
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:api');
-
 Route::resource('/category', 'CategoryController', [ 'only' => [
     'index', 'show'
+]]);
+
+Route::resource('/cart', 'CartController', [ 'only' => [
+    'show'
+]]);
+
+Route::resource('/author', 'AuthorController', [ 'only' => [
+    'show'
+]]);
+
+Route::resource('/bill', 'BillController', [ 'only' => [
+    'show'
+]]);
+
+Route::get('/book/{book_id}/{user_id?}', 'BookController@show');
+
+Route::resource('/rate', 'RateController', [ 'only' => [
+    'show'
+]]);
+
+Route::resource('/status', 'StatusController', [ 'only' => [
+    'show'
 ]]);

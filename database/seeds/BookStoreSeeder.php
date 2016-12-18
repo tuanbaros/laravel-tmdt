@@ -15,10 +15,11 @@ class BookStoreSeeder extends Seeder
         factory(App\CustomerReview::class, 20)->create();
         factory(App\Cart::class, 20)->create();
         factory(App\Bill::class, 20)->create();
-        factory(App\Book::class, 100)->create();
-        factory(App\Image::class, 200)->create();
+        factory(App\Book::class, 500)->create();
+        // factory(App\Image::class, 200)->create();
         factory(App\Author::class, 10)->create();
         factory(App\CartBook::class, 10)->create();
+        factory(App\Rate::class, 100)->create();
         $this->fakeCategory();
     }
 
@@ -46,7 +47,7 @@ class BookStoreSeeder extends Seeder
         foreach ($categoryNames as $key => $name) {
             DB::table('categories')->insert([
                 'name' => $name,
-                'image_id' => $faker->unique()->numberBetween(1, 40)
+                'image_url' => $faker->imageUrl(320, 222)
             ]);
         }
     }

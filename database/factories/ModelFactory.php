@@ -32,8 +32,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\CustomerReview::class, function (Faker\Generator $faker) {
 
     return [
-        'book_id' => $faker->numberBetween(1, 10),
-        'user_id' => $faker->numberBetween(1, 10),
+        'book_id' => $faker->numberBetween(1, 500),
+        'user_id' => $faker->numberBetween(1, 20),
         'content' => $faker->text,
     ];
 });
@@ -45,17 +45,17 @@ $factory->define(App\Cart::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Rate::class, function (Faker\Generator $faker) {
-    return [
-        'book_id' =>$faker->numberBetween(1, 10),
-        'user_id' => $faker->numberBetween(1, 20),
-    ];
-});
+// $factory->define(App\Rate::class, function (Faker\Generator $faker) {
+//     return [
+//         'book_id' =>$faker->numberBetween(1, 10),
+//         'user_id' => $faker->numberBetween(1, 20),
+//     ];
+// });
 
 $factory->define(App\Bill::class, function (Faker\Generator $faker) {
     return [
-        'user_id' =>$faker->numberBetween(1, 10),
-        'cart_id' => $faker->numberBetween(1, 10),
+        'user_id' =>$faker->numberBetween(1, 20),
+        'cart_id' => $faker->numberBetween(1, 20),
         'status' => $faker->randomElement(['processing', 'shipping', 'completed', 'cancel']),
         'name_customer' => $faker->name,
         'phone' => $faker->phoneNumber,
@@ -72,29 +72,31 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(2, 1, 100),
         'new_price' => $faker->randomFloat(2, 1, 100),
         'language' => $faker->languageCode,
-        'discount_percent' => 0,
+        'discount_percent' => $faker->numberBetween(1, 50),
         'description' => $faker->text,
         'rate_average' => $faker->randomFloat(1, 0, 5),
         'quantity_selling' => $faker->numberBetween(20, 50),
         'quantity_remain' => $faker->numberBetween(50, 100),
         'date_releases' => $faker->dateTime,
+        'image_url' => $faker->imageUrl(222, 320),
 
     ];
 });
 
-$factory->define(App\Image::class, function (Faker\Generator $faker) {
-    return [
-        'book_id' =>$faker->numberBetween(1, 100),
-        'url' => $faker->imageUrl(222, 320),
-        'description' => $faker->text,
-    ];
-});
+// $factory->define(App\Image::class, function (Faker\Generator $faker) {
+//     return [
+//         'book_id' =>$faker->numberBetween(1, 100),
+//         'url' => $faker->imageUrl(222, 320),
+//         'description' => $faker->text,
+//     ];
+// });
 
 $factory->define(App\Author::class, function (Faker\Generator $faker) {
     return [
         'name' =>$faker->name,
         'introduce' => $faker->text,
         'contact' => $faker->address,
+        'avatar' => $faker->imageUrl(222, 222),
     ];
 });
 
@@ -103,5 +105,13 @@ $factory->define(App\CartBook::class, function (Faker\Generator $faker) {
         'cart_id' => $faker->numberBetween(1, 5),
         'book_id' => $faker->numberBetween(1, 100),
         'quantity' => $faker->numberBetween(1, 10),
+    ];
+});
+
+$factory->define(App\Rate::class, function (Faker\Generator $faker) {
+    return [
+        'book_id' => $faker->numberBetween(1, 500),
+        'user_id' => $faker->numberBetween(1, 20),
+        'point' => $faker->numberBetween(1, 5),
     ];
 });
