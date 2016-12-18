@@ -17,7 +17,7 @@ class CreateRatesTable extends Migration
             $table->increments('id');
             $table->integer('book_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->float('point');
+            $table->integer('point');
             $table->timestamps();
         });
     }

@@ -27,6 +27,7 @@ class CreateBooksTable extends Migration
             $table->integer('quantity_selling');
             $table->integer('quantity_remain');
             $table->string('date_releases');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
