@@ -31,8 +31,9 @@ class CategoryController extends Controller
         return DB::table('books')
             ->where('books.category_id', '=', $id)
             ->join('categories', 'books.category_id', '=', 'categories.id')
+            ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy('id')
-            ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price')
+            ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price', 'authors.name as author')
             ->take(10)->get()->toJson();
     }
 }
