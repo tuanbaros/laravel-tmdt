@@ -67,7 +67,7 @@ $factory->define(App\Bill::class, function (Faker\Generator $faker) {
 $factory->define(App\Book::class, function (Faker\Generator $faker) {
     $discount = $faker->numberBetween(1, 50);
     $price = $faker->randomFloat(2, 1, 100);
-    $new_price = $price * $discount / 100;
+    $new_price = $price - $price * $discount / 100;
     return [
         'title' => rtrim($faker->text(40), '.'),
         'author_id' => $faker->numberBetween(1, 10),
