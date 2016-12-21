@@ -12,6 +12,7 @@ class BookController extends Controller
     {
         $book = DB::table('books')
             ->where('books.id', $book_id)
+            ->select('books.*', 'books.price as old_price', 'books.new_price as price')
             ->first();
 
         $author = DB::table('authors')

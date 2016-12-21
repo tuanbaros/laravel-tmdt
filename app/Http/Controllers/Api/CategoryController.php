@@ -33,7 +33,7 @@ class CategoryController extends Controller
             ->join('categories', 'books.category_id', '=', 'categories.id')
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy('id')
-            ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price', 'authors.name as author')
+            ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author')
             ->take(10)->get()->toJson();
     }
 }
