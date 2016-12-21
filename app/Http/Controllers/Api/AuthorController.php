@@ -33,12 +33,12 @@ class AuthorController extends Controller
 
         $totals = DB::table('books')
             ->where('books.author_id', $authorId)
-            ->select('books.quantity_selling', 'books.quantity_remain')
+            ->select('books.quantity_selling')
             ->get();
 
         $total = 0;
         foreach ($totals as $key => $t) {
-            $total += ($t->quantity_remain - $t->quantity_selling);
+            $total += $t->quantity_selling;
         }
         $author->TotalSold = $total;
         $author->listBooks = $books;

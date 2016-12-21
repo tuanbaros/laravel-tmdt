@@ -65,18 +65,21 @@ $factory->define(App\Bill::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Book::class, function (Faker\Generator $faker) {
+    $discount = $faker->numberBetween(1, 50);
+    $price = $faker->randomFloat(2, 1, 100);
+    $new_price = $price * $discount / 100;
     return [
         'title' => rtrim($faker->text(40), '.'),
         'author_id' => $faker->numberBetween(1, 10),
         'category_id' => $faker->numberBetween(1, 14),
-        'price' => $faker->randomFloat(2, 1, 100),
-        'new_price' => $faker->randomFloat(2, 1, 100),
+        'price' => $price,
+        'new_price' => $new_price,
         'language' => $faker->languageCode,
-        'discount_percent' => $faker->numberBetween(1, 50),
+        'discount_percent' => $discount,
         'description' => $faker->text,
         'rate_average' => $faker->randomFloat(1, 0, 5),
         'quantity_selling' => $faker->numberBetween(20, 50),
-        'quantity_remain' => $faker->numberBetween(50, 100),
+        'quantity_remain' => $faker->numberBetween(20, 50),
         'date_releases' => $faker->dateTime,
         'image_url' => $faker->imageUrl(222, 320),
 
