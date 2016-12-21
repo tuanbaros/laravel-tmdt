@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Book;
 
 class AuthorController extends Controller
 {
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $skip = $request->query('skip');
         $book = DB::table('books')
             ->where('books.id', $id)
             ->select('books.author_id')
@@ -19,14 +21,10 @@ class AuthorController extends Controller
             ->where('authors.id', $authorId)
             ->select('authors.id', 'authors.name', 'authors.introduce', 'authors.contact', 'authors.avatar')
             ->first();
-
-        $books = DB::table('books')
-            ->where('books.author_id', $authorId)
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->select('books.id as idBook', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author')
-            ->get();
+                 
+        $books = Book::getBookOfAuthor($authorId);
         $rate = 0;
-        foreach ($books as $key => $b) {
+        foreach ($books->get() as $key => $b) {
             $rate += $b->rateAverage; 
         }
         $author->rateBookAverage = $rate/count($books);
@@ -41,7 +39,7 @@ class AuthorController extends Controller
             $total += $t->quantity_selling;
         }
         $author->TotalSold = $total;
-        $author->listBooks = $books;
+        $author->listBooks = $books->skip($skip)->take(10)->get();
         return json_encode($author);
     }
 }

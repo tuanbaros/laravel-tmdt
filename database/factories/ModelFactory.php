@@ -16,7 +16,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        //'id_fb' => null,
+        'id_fb' => 1,
         //'password' => null,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,

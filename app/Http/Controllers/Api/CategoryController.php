@@ -26,14 +26,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $skip = $request->query('skip');
         return DB::table('books')
             ->where('books.category_id', '=', $id)
             ->join('categories', 'books.category_id', '=', 'categories.id')
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy('id')
             ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author')
-            ->take(10)->get()->toJson();
+            ->skip($skip)->take(10)->get()->toJson();
     }
 }

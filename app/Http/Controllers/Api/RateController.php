@@ -8,8 +8,9 @@ use DB;
 
 class RateController extends Controller
 {
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $skip = $request->query('skip');
         $books = DB::table('books')
             ->where('books.id', $id)
             ->select('books.id')
@@ -55,7 +56,7 @@ class RateController extends Controller
                 ->where('customer_reviews.book_id', $id)
                 ->join('users', 'users.id', '=', 'customer_reviews.user_id')
                 ->select('customer_reviews.*', 'customer_reviews.created_at as time', 'users.name as usernameRating', 'users.avatar as urlAvatar')
-                ->get();
+                ->skip($skip)->take(10)->get();
 
         foreach ($reviews as $key => $review) {
             $rate = DB::table('rates')

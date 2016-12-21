@@ -39,3 +39,13 @@ Route::resource('/rate', 'RateController', [ 'only' => [
 Route::resource('/status', 'StatusController', [ 'only' => [
     'show'
 ]]);
+
+Route::post('/login', [
+    'as' => 'auth.login',
+    'uses' => 'AuthController@login'
+]);
+
+Route::post('/logout', [
+    'as' => 'auth.logout',
+    'uses' => 'AuthController@logout'
+]);
