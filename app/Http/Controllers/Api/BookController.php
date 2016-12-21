@@ -27,13 +27,13 @@ class BookController extends Controller
         $total = 0;
         foreach ($books as $key => $b) {
             $rate += $b->rate_average; 
-            $total += ($b->quantity_remain - $b->quantity_selling);
+            $total += $b->quantity_selling;
         }
         $author->rateBookAverage = $rate/count($books);
         $author->TotalSold = $total;
         
         $book->author = $author;
-        $book->quantityBuy = $book->quantity_remain - $book->quantity_selling;
+        $book->quantityBuy = $book->quantity_selling;
 
         if ($user_id > 0) {
             $rate = DB::table('rates')
@@ -49,7 +49,7 @@ class BookController extends Controller
             $book->userRate = 0;
         }
 
-        if ($book->quantity_selling > 0) {
+        if ($book->quantity_remain > 0) {
             $book->status = 'Con hang';
         } else {
             $book->status = 'Het hang';
