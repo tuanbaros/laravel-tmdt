@@ -17,7 +17,7 @@ class CartController extends Controller
             ->where('cart_books.cart_id', $cart->id)
             ->join('books', 'cart_books.book_id', '=', 'books.id')
             ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->select('cart_books.id', 'cart_books.book_id as idBook', 'books.title', 'authors.name as author', 'books.image_url as images', 'books.price', 'books.new_price', 'cart_books.quantity', 'cart_books.created_at as time')
+            ->select('cart_books.id', 'cart_books.book_id as idBook', 'books.title', 'authors.name as author', 'books.image_url as images', 'books.price as old_price', 'books.new_price as price', 'cart_books.quantity', 'cart_books.created_at as time')
             ->orderBy('cart_books.created_at')
             ->get();
         $cart->cartbooks = $cartbooks;

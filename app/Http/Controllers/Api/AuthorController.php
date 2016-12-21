@@ -23,7 +23,7 @@ class AuthorController extends Controller
         $books = DB::table('books')
             ->where('books.author_id', $authorId)
             ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->select('books.id as idBook', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price', 'authors.name as author')
+            ->select('books.id as idBook', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author')
             ->get();
         $rate = 0;
         foreach ($books as $key => $b) {
