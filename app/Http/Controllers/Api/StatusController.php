@@ -8,29 +8,30 @@ use DB;
 
 class StatusController extends Controller
 {
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $skip = $request->query('skip');
         switch ($id) {
             case 'new-releases':
                 return DB::table('books')
                     ->join('authors', 'books.author_id', '=', 'authors.id')
                     ->orderBy('books.date_releases', 'DESC')
                     ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author', 'books.date_releases')
-                    ->take(10)->get()->toJson();
+                    ->skip($skip)->take(10)->get()->toJson();
                 break;
             case 'top-selling':
                 return DB::table('books')
                     ->join('authors', 'books.author_id', '=', 'authors.id')
                     ->orderBy('books.quantity_selling', 'DESC')
                     ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author', 'books.quantity_selling')
-                    ->take(10)->get()->toJson();
+                    ->skip($skip)->take(10)->get()->toJson();
                 break;
             case 'top-saleoff':
                 return DB::table('books')
                     ->join('authors', 'books.author_id', '=', 'authors.id')
                     ->orderBy('books.discount_percent', 'DESC')
                     ->select('books.id', 'books.title', 'books.image_url as urlImage', 'books.rate_average as rateAverage', 'books.price as old_price', 'books.new_price as price', 'authors.name as author', 'books.discount_percent')
-                    ->take(20)->get()->toJson();
+                    ->skip($skip)->take(10)->get()->toJson();
                 break;
             default:
                 # code...
