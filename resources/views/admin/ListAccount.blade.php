@@ -40,9 +40,9 @@
                                     <td>{{$account->address}}</td>
                                     <td>{{$account->phone}}</td>
                                     <td><?php $date=explode(' ', $account->updated_at); echo $date[0];?></td>
-                                    <td><center><a href="account.bill-{{$account->id}}"><u>Xem</u></a></center></td>
-                                    <td><center><a href="account.cart-{{$account->id}}"><u>Xem</u></a></center></td>
-                                    <td><center><a href="account.delete-{{$account->id}}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
+                                    <td><center><a href="{{ route('account.bill', $account->id) }}"><u>Xem</u></a></center></td>
+                                    <td><center><a href="{{ route('account.cart', $account->id) }}"><u>Xem</u></a></center></td>
+                                    <td><center><a href="{{ route('account.delete', $account->id) }}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
                                 </tr>
                                 @endforeach
                             </tbody>

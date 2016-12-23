@@ -52,12 +52,12 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <a href="product.description-{{$book->id}}" ><u>Xem thông tin</u></a>
+                                                <a href="{{ route('product.description', $book->id) }}"><u>Xem thông tin</u></a>
                                             </center>
                                         </td>
                                         <td>
                                             <center>
-                                                <a href="cart_item.delete-{{$cb->id}}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href="{{ route('cart_item.delete', $cb->id) }}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a>
                                             </center>
                                         </td>
                                     </tr>
