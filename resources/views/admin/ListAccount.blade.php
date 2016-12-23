@@ -24,9 +24,8 @@
                                     <th style="width:13%">Số điện thoại</th>
                                     <th style="width:8%">Ngày tạo</th>
                                     <th style="width:10%">DS Hóa đơn</th>
-                                    <th style="width:10%">LS giao dịch</th>
-                                    <th style="width:8%">Giỏ hàng</th>
-                                    <th style="width:10%">Quản lý</th>
+                                    <th style="width:10%">Giỏ hàng</th>
+                                    <th style="width:8%">Quản lý</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,10 +40,9 @@
                                     <td>{{$account->address}}</td>
                                     <td>{{$account->phone}}</td>
                                     <td><?php $date=explode(' ', $account->updated_at); echo $date[0];?></td>
-                                    <td><center><a href=""><u>Xem</u></a></center></td>
-                                    <td><center><a href=""><u>Xem</u></a></center></td>
-                                    <td><center><a href=""><u>Xem</u></a></center></td>
-                                    <td><center><a href="" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
+                                    <td><center><a href="account.bill-{{$account->id}}"><u>Xem</u></a></center></td>
+                                    <td><center><a href="account.cart-{{$account->id}}"><u>Xem</u></a></center></td>
+                                    <td><center><a href="account.delete-{{$account->id}}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
                                 </tr>
                                 @endforeach
                             </tbody>

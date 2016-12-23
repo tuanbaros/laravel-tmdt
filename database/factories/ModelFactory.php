@@ -45,6 +45,13 @@ $factory->define(App\Cart::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
+    return [
+        'bill_id' => $faker->unique()->numberBetween(1,20),
+        'total_cost' => $faker->randomFloat(2, 1, 100),
+    ];
+});
+
 // $factory->define(App\Rate::class, function (Faker\Generator $faker) {
 //     return [
 //         'book_id' =>$faker->numberBetween(1, 10),
@@ -86,13 +93,13 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
     ];
 });
 
-// $factory->define(App\Image::class, function (Faker\Generator $faker) {
-//     return [
-//         'book_id' =>$faker->numberBetween(1, 100),
-//         'url' => $faker->imageUrl(222, 320),
-//         'description' => $faker->text,
-//     ];
-// });
+ $factory->define(App\Image::class, function (Faker\Generator $faker) {
+     return [
+         'book_id' =>$faker->numberBetween(1, 100),
+         'url' => $faker->imageUrl(222, 320),
+         'description' => $faker->text,
+     ];
+ });
 
 $factory->define(App\Author::class, function (Faker\Generator $faker) {
     return [
@@ -105,7 +112,8 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
 
 $factory->define(App\CartBook::class, function (Faker\Generator $faker) {
     return [
-        'cart_id' => $faker->numberBetween(1, 5),
+        'cart_id' => $faker->numberBetween(0, 10),
+        'order_id' => $faker->numberBetween(1, 10),
         'book_id' => $faker->numberBetween(1, 100),
         'quantity' => $faker->numberBetween(1, 10),
     ];

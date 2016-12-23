@@ -30,5 +30,17 @@ class User extends Authenticatable
     public function customerReviews(){
         return $this->hasMany('App\CustomerReview');
     }
+    
+    public function carts(){
+        return $this->hasOne('App\Cart');
+    }
+
+    public function rates(){
+        return $this->hasMany('App\Rate');
+    }
+
+    public function bills(){
+        return $this->hasMany('App\Bill');
+    }
 
 }

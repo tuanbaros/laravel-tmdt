@@ -16,9 +16,9 @@ class BookStoreSeeder extends Seeder
         factory(App\Cart::class, 20)->create();
         factory(App\Bill::class, 20)->create();
         factory(App\Book::class, 500)->create();
-        // factory(App\Image::class, 200)->create();
+        factory(App\Image::class, 200)->create();
         factory(App\Author::class, 10)->create();
-        factory(App\CartBook::class, 10)->create();
+        factory(App\CartBook::class, 50)->create();
         factory(App\Rate::class, 100)->create();
         $this->fakeCategory();
     }

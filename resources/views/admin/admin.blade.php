@@ -76,9 +76,7 @@
                             </li>
                             <li><a><i class="fa fa-table"></i> Quản lý giao dịch <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="transaction">Quản lý giao dịch</a>
-                                    </li>
-                                     <li><a href="bill">Quản lý Hóa đơn </a>
+                                     <li><a href="bill.list">Quản lý Hóa đơn </a>
                                     </li>
                                 </ul>
                             </li>

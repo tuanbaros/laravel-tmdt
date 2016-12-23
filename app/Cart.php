@@ -15,4 +15,8 @@ class Cart extends Model
     // {
     //     return $this->hasMany('App\CartBook');
     // }
+    
+    public function cartBooks(){
+        return $this->hasMany('App\CartBook');
+    }
 }

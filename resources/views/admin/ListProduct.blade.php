@@ -20,7 +20,7 @@
 
                             </div>
                             <div class="col-sm-2 col-sm-offset-4">
-                                <a href="addproduct"><input type="button" name="" id="" class="btn btn-primary" value="Thêm sản phẩm"></a>
+                                <a href="product.add"><input type="button" name="" id="" class="btn btn-primary" value="Thêm sản phẩm"></a>
                             </div>
                         </div>
                         <table class="table table-striped table-bordered table-hover" id="dataTables">
@@ -33,7 +33,6 @@
                                     <th style="width:10%">Số lượng còn lại</th>
                                     <th style="width:8%">Ngôn ngữ</th>
                                     <th style="width:10%">Xem thông tin</th>
-                                    <th style="width:8%">Hình ảnh</th>
                                     <th style="width:8%">Quản lý</th>
                                 </tr>
                             </thead>
@@ -49,10 +48,9 @@
                                     <td>{{$book->quantity_selling}}</td>
                                     <td>{{$book->quantity_remain}}</td>
                                     <td>{{$book->language}}</td>
-                                    <td><a href=""><u>Xem thông tin</u></a></td>
-                                    <td><a href=""><button class="btn btn-default">Xem hình ảnh</button></a></td>
+                                    <td><a href="product.description-{{$book->id}}"><u>Xem thông tin</u></a></td>
                                     <td><center><a href="" title="Sửa" style="margin-right: 10%"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            <a href="e" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
+                                            <a href="product.delete-{{$book->id}}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
                                 </tr>
                                 @endforeach
                             </tbody>
