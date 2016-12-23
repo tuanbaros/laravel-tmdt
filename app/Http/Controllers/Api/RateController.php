@@ -56,6 +56,7 @@ class RateController extends Controller
                 ->where('customer_reviews.book_id', $id)
                 ->join('users', 'users.id', '=', 'customer_reviews.user_id')
                 ->select('customer_reviews.*', 'customer_reviews.created_at as time', 'users.name as usernameRating', 'users.avatar as urlAvatar')
+                ->orderBy('time', 'DESC')
                 ->skip($skip)->take(10)->get();
 
         foreach ($reviews as $key => $review) {

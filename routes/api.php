@@ -49,3 +49,8 @@ Route::post('/logout', [
     'as' => 'auth.logout',
     'uses' => 'AuthController@logout'
 ]);
+
+Route::get('/search/{key}', [
+    'as' => 'search',
+    'uses' => 'SearchController@search'
+]);
