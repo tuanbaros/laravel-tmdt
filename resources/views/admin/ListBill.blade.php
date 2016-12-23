@@ -29,23 +29,22 @@
                         <tbody>
                             <?php $i=0; ?>
                             @foreach($bills as $bill)
-                                <?php $user = $bill->users?>
                             <tr>
                                 <td><center>{{++$i}}</center></td>
                                 <td><center>{{$bill->id}}</center></td>
 
-                                @if($user==null)
+                                @if($bill->users == null)
                                     <td><center><u>{{$bill->name_customer}}</u></center></td>
                                     <td><center>{{$bill->address}}</center></td>
                                     <td><center>{{$bill->phone}}</center></td>
                                 @else
-                                    <td><center><u><a href="bill.account-{{$user->id}}">{{$user->name}}</a></u></center></td>
-                                    <td><center>{{$user->address}}</center></td>
-                                    <td><center>{{$user->phone}}</center></td>
+                                    <td><center><u><a href="{{ route('bill.account', $bill->users->id) }}">{{$bill->users->name}}</a></u></center></td>
+                                    <td><center>{{$bill->users->address}}</center></td>
+                                    <td><center>{{$bill->users->phone}}</center></td>
                                 @endif
 
-                                <td><center><button class btn btn-primary>
-                                            <a href="bill.detail-{{$bill->id}}">Xem</a></button></center></td>
+                                <td><center>
+                                            <a href="{{ route('bill.detail', $bill->id)}}" class= "btn btn-default">Xem</a></center></td>
 
                                 <td><center>{{$bill->status}}
                                         <form action="bill.change.status" method="get">
@@ -62,7 +61,7 @@
 
                                     </center></td>
                                 <td><center><?php $date=explode(' ', $bill->updated_at); echo $date[0]; ?></center></td>
-                                <td><center><button><a href="bill.delete-{{$bill->id}}">Xóa</a></button>&nbsp&nbsp<button><a href="">In</a></button></center></td>
+                                <td><center><a class="btn btn-default" href="{{ route('bill.delete', $bill->id) }}">Xóa</a>&nbsp&nbsp<a class="btn btn-default" href="">In</a></center></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -78,3 +77,11 @@
     <!-- /.col-lg-12 -->
 </div>
 @endsection('content')
+
+@section('script')
+    <script src="{{ asset('/js/dttable.js') }}"></script>
+    <script>
+        var dttable = new dttable();
+        dttable.init('#dataTables');
+    </script>
+@endsection

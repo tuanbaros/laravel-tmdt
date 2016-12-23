@@ -34,7 +34,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Admin</span></a>
+                    <a href="{{ url('/') }}" class="site_title"><i class="fa fa-paw"></i> <span>Admin</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -60,31 +60,31 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="list.product">Danh sách các sản phẩm</a>
+                                    <li><a href="{{ url('/list.product') }}">Danh sách các sản phẩm</a>
                                     </li>
-                                    <li><a href="listsaleproduct">Các sản phẩm khuyến mãi</a>
+                                    <li><a href="{{ url('/listsaleproduct') }}">Các sản phẩm khuyến mãi</a>
                                     </li>
-                                    <li><a href="listoldproduct">Các sản phẩm cũ</a>
+                                    <li><a href="{{ url('/listoldproduct') }}">Các sản phẩm cũ</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-edit"></i> Quản lý tài khoản <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="account.manager">Quản lý tài khoản</a>
+                                    <li><a href="{{ url('/account.manager') }}">Quản lý tài khoản</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-table"></i> Quản lý giao dịch <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                     <li><a href="bill.list">Quản lý Hóa đơn </a>
+                                     <li><a href="{{ url('/bill.list') }}">Quản lý Hóa đơn </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-clone"></i> Thống kê <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="bestsellers">Sản phẩm bán chạy</a>
+                                    <li><a href="{{ url('/bestsellers') }}">Sản phẩm bán chạy</a>
                                     </li>
-                                    <li><a href="outofstock">Sản phẩm hết hàng</a>
+                                    <li><a href="{{ url('/bestsellers') }}">Sản phẩm hết hàng</a>
                                     </li>
                                 </ul>
                             </li>

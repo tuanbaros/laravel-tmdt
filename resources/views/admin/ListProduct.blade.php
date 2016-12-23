@@ -20,7 +20,7 @@
 
                             </div>
                             <div class="col-sm-2 col-sm-offset-4">
-                                <a href="product.add"><input type="button" name="" id="" class="btn btn-primary" value="Thêm sản phẩm"></a>
+                                <a href="{{ url('/product.add') }}"><input type="button" name="" id="" class="btn btn-primary" value="Thêm sản phẩm"></a>
                             </div>
                         </div>
                         <table class="table table-striped table-bordered table-hover" id="dataTables">
@@ -48,9 +48,9 @@
                                     <td>{{$book->quantity_selling}}</td>
                                     <td>{{$book->quantity_remain}}</td>
                                     <td>{{$book->language}}</td>
-                                    <td><a href="product.description-{{$book->id}}"><u>Xem thông tin</u></a></td>
+                                    <td><a href="{{ route('product.description', $book->id) }}"><u>Xem thông tin</u></a></td>
                                     <td><center><a href="" title="Sửa" style="margin-right: 10%"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            <a href="product.delete-{{$book->id}}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
+                                            <a href="{{ route('product.detele', $book->id) }}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
                                 </tr>
                                 @endforeach
                             </tbody>
