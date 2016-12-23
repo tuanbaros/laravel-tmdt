@@ -62,6 +62,7 @@
                                     </center></td>
                                 <td><center><?php $date=explode(' ', $bill->updated_at); echo $date[0]; ?></center></td>
                                 <td><center><a class="btn btn-default" href="{{ route('bill.delete', $bill->id) }}">Xóa</a>&nbsp&nbsp<a class="btn btn-default" href="">In</a></center></td>
+
                             </tr>
                             @endforeach
                         </tbody>

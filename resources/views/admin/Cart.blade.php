@@ -40,11 +40,14 @@
 
                                     <?php
                                             $book = $cb->books;
+                                            if (!$book){
+                                                continue;
+                                            }
                                     ?>
 
                                     <tr>
                                         <td>{{++$i}}</td>
-                                        <td>{{$book->title}}</td>
+                                        <td>{{ $book['title'] }}</td>
                                         <td>
                                             <center>
                                                 {{$cb->quantity}}
