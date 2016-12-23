@@ -56,6 +56,21 @@ Route::get('login.html', function() {
 
 // account manager
 Route::get('account.manager', 'AdminController@getListAccount');
+Route::get('account.delete-{id}', 'AdminController@deleteAccount');
+Route::get('account.bill-{id}', 'AdminController@listBillForEachAccount');
+Route::get('account.cart-{id}', 'AdminController@cart');
+Route::get('cart_item.delete-{id}', 'AdminController@deleteCartItem');
 
 // book manager
 Route::get('list.product', 'AdminController@getListProduct');
+Route::get('product.add', 'AdminController@getAddProduct');
+Route::post('product.add', 'AdminController@postAddProduct');
+Route::get('product.description-{id}', 'AdminController@productDescription');
+Route::get('product.delete-{id}', 'AdminController@deleteProduct');
+
+// bill manager
+Route::get('bill.list', 'AdminController@getListBill');
+Route::get('bill.account-{id}', 'AdminController@infoUser');
+Route::get('bill.detail-{id}', 'AdminController@detailBill');
+Route::get('bill.change.status', 'AdminController@changeStatus');
+Route::get('bill.delete-{id}', 'AdminController@deleteBill');
