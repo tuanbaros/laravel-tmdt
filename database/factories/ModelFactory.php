@@ -45,20 +45,6 @@ $factory->define(App\Cart::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Order::class, function (Faker\Generator $faker) {
-    return [
-        'bill_id' => $faker->unique()->numberBetween(1,20),
-        'total_cost' => $faker->randomFloat(2, 1, 100),
-    ];
-});
-
-// $factory->define(App\Rate::class, function (Faker\Generator $faker) {
-//     return [
-//         'book_id' =>$faker->numberBetween(1, 10),
-//         'user_id' => $faker->numberBetween(1, 20),
-//     ];
-// });
-
 $factory->define(App\Bill::class, function (Faker\Generator $faker) {
     return [
         'user_id' =>$faker->numberBetween(1, 20),
@@ -124,5 +110,12 @@ $factory->define(App\Rate::class, function (Faker\Generator $faker) {
         'book_id' => $faker->numberBetween(1, 500),
         'user_id' => $faker->numberBetween(1, 20),
         'point' => $faker->numberBetween(1, 5),
+    ];
+});
+
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
+    return [
+        'bill_id' => $faker->unique()->numberBetween(21, 40) - 20,
+        'total_cost' => $faker->randomFloat(2, 1, 100),
     ];
 });
