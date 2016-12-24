@@ -48,7 +48,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Thông Tin Tác Giả</div>
                                 <div class="panel-body">
-                                    <img src="{{$author->avatar}}" alt="{{$author->avatar}}" style="width:140px;height:210px;">
+                                    <img src="{{$author->avatar}}" alt="{{$author->avatar}}" style="width:140px;height:140px;">
                                     <ul class="list-group">
                                         <li class="list-group-item">Tên Tác Giả :
                                             <span style="margin-right: 6%"></span> {{$author->name}}</li>
