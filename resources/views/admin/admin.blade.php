@@ -62,9 +62,7 @@
                                 <ul class="nav child_menu">
                                     <li><a href="{{ url('/list.product') }}">Danh sách các sản phẩm</a>
                                     </li>
-                                    <li><a href="{{ url('/listsaleproduct') }}">Các sản phẩm khuyến mãi</a>
-                                    </li>
-                                    <li><a href="{{ url('/listoldproduct') }}">Các sản phẩm cũ</a>
+                                    <li><a href="{{ url('/product.sale') }}">Các sản phẩm khuyến mãi</a>
                                     </li>
                                 </ul>
                             </li>
@@ -77,14 +75,13 @@
                             <li><a><i class="fa fa-table"></i> Quản lý giao dịch <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                      <li><a href="{{ url('/bill.list') }}">Quản lý Hóa đơn </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-clone"></i> Thống kê <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="{{ url('/bestsellers') }}">Sản phẩm bán chạy</a>
+                                    <li><a href="{{ url('/product.best.selling') }}">Sản phẩm bán chạy</a>
                                     </li>
-                                    <li><a href="{{ url('/bestsellers') }}">Sản phẩm hết hàng</a>
+                                    <li><a href="{{ url('/product.sold.out') }}">Sản phẩm hết hàng</a>
                                     </li>
                                 </ul>
                             </li>

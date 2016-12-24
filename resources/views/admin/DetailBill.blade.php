@@ -36,9 +36,9 @@
             <div class="col-sm-9">
                 <p>Thanh toán khi nhận hàng</p>
                 <p>Giao hàng/Voucher giấy Tận Nơi</p>
-                <p>0đ</p>
-                <p>0đ</p>
-                <p>{{$order->total_cost}}đ</p>
+                <p>0$</p>
+                <p>0$</p>
+                <p>{{$order->total_cost}}$</p>
             </div>
         </big>
         <br/>
@@ -54,20 +54,20 @@
         <hr style="border: 1px solid rgb(186, 186, 186)"/>
         <big>
             <div class="col-sm-3">
-                <p>Họ Tên</p>
+                @if($user!=null)
+                    <p>Người đặt</p>
+                @endif
+                <p>Người nhận</p>
                 <p>Địa Chỉ</p>
                 <p>Số Điện Thoại</p>
             </div>
             <div class="col-sm-9">
                 @if($user!=null)
                     <p>{{$user->name}}</p>
-                    <p>{{$user->address}}</p>
-                    <p>{{$user->phone}}</p>
-                @else
+                @endif
                     <p>{{$bill->name_customer}}</p>
                     <p>{{$bill->address}}</p>
                     <p>{{$bill->phone}}</p>
-                @endif
             </div>
         </big>
         <br/>
@@ -75,7 +75,7 @@
         <br/>
         <br/>
         <br/>
-
+        <br/>
         <h4>Thông Tin Deals</h4>
         <hr style="border: 1px solid rgb(186, 186, 186)"/>
         <table class="table">
@@ -96,9 +96,9 @@
                     <tr>
                         <th scope="row">{{++$i}}</th>
                         <td>{{$book->title}}</td>
-                        <td>{{$book->new_price}}đ</td>
+                        <td>{{$book->new_price}}$</td>
                         <td>{{$cb->quantity}}</td>
-                        <td>{{$book->new_price*$cb->quantity}}đ</td>
+                        <td>{{$book->new_price*$cb->quantity}}$</td>
                     </tr>
                 @endforeach
             @endif

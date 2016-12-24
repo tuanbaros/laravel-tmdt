@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Bill;
 use App\Book;
-use App\Cart;
 use App\CartBook;
 use App\Category;
+use App\Image;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
@@ -99,17 +98,112 @@ class AdminController extends Controller
         return view('admin.AddProduct');
     }
     public function postAddProduct(){
-        
+        if (isset($_POST['product_add'])){
+            $book = new Book;
+            $book->title = $_POST['title'];
+            // add author
+            $author = new Author;
+            $author->name = $_POST['author_name'];
+            $author->introduce = $_POST['author_introduce'];
+            $author->contact = $_POST['author_contact'];
+            $author->avatar = "http://lorempixel.com/222/222/?78400";
+            $author->save();
+
+            $book->author_id = $author->id;
+
+            $category_id = Category::where('name', $_POST['category'])->first()->id;
+            $book->category_id = $category_id;
+
+            $book->language = $_POST['language'];
+            $book->price = $_POST['price'];
+            if ($_POST['discount_percent']==0){
+                $book->new_price = $_POST['price'];
+            }else{
+                $book->new_price = $_POST['price']*(1-$_POST['discount_percent']/100);
+            }
+
+            $book->rate_average = 0;
+            $book->discount_percent = $_POST['discount_percent'];
+            $book->quantity_remain = $_POST['quantity_remain'];
+            $book->quantity_selling = 0;
+            $book->description = $_POST['description'];
+            $book->date_releases = $_POST['date_releases'];
+            $book->image_url = "http://lorempixel.com/222/320/?48483";
+            $book->save();
+
+            $image = new Image;
+            $image->book_id = $book->id;
+            $image->url = "http://lorempixel.com/222/320/?48483";
+            $image->description = $book->title;
+            $image->save();
+
+            return redirect('list.product');
+        }else{
+            echo "Thêm sản phẩm mới không thành công!";
+        }
     }
 
     /* product description */
     public function productDescription($id){
         $book = Book::find($id);
-        $image = $book->images->first();
+        $image = new Image;
+        $image->url = $book->image_url;
+        $image->description = $book->title;
+        if (!$image){
+            $image = $book->images->first();
+        }
         $category = Category::findOrFail($book->category_id);
         $author = Author::findOrFail($book->author_id);
         
         return view('admin.InfoProduct', compact('image', 'book', 'category', 'author'));
+    }
+    
+    /* edit book */
+    public function getEditProduct($id){
+        $book = Book::find($id);
+        $author = Author::findOrFail($book->author_id);
+        $category = Category::findOrFail($book->category_id);
+        return view('admin.EditProduct',compact('book', 'author', 'category'));
+    }
+
+    public function postEditProduct($id){
+        if (isset($_POST['product_edit'])){
+            $book = Book::find($id);
+            $book->title = $_POST['title'];
+            // edit author
+            $author = Author::findOrFail($book->author_id);
+            $author->name = $_POST['author_name'];
+            $author->introduce = $_POST['author_introduce'];
+            $author->contact = $_POST['author_contact'];
+            $author->save();
+            // edit category
+            $category_id = Category::where('name', $_POST['category'])->first()->id;
+            $book->category_id = $category_id;
+
+            $book->language = $_POST['language'];
+            $book->price = $_POST['price'];
+            if ($_POST['discount_percent']==0){
+                $book->new_price = $_POST['price'];
+            }else{
+                $book->new_price = $_POST['price']*(1-$_POST['discount_percent']/100);
+            }
+
+            $book->discount_percent = $_POST['discount_percent'];
+            $book->quantity_remain = $_POST['quantity_remain'];
+            $book->description = $_POST['description'];
+            $book->date_releases = $_POST['date_releases'];
+            $book->save();
+
+            /*$image = new Image;
+            $image->book_id = $book->id;
+            $image->url = "http://lorempixel.com/222/320/?48483";
+            $image->description = $book->title;
+            $image->save();*/
+
+            return redirect('list.product');
+        }else{
+            echo "Sửa sản phẩm không thành công!";
+        }
     }
     
     /* delete book */
@@ -117,6 +211,27 @@ class AdminController extends Controller
         $book = Book::find($id);
         $book->delete();
         return redirect('list.product');
+    }
+    
+    /*
+     * statistic manager
+     * */
+    /* list product sale */
+    public function getListProductSale(){
+        $books = Book::where('discount_percent','>',0)->get();
+        return view('admin.ListProductSale', compact('books'));
+    }
+
+    /* list product best selling */
+    public function getListProductBestSelling(){
+        $books = Book::orderBy('quantity_selling', 'desc')->take(10)->get();
+        return view('admin.ListProductBestSelling', compact('books'));
+    }
+
+    /* list product sold out */
+    public function getListProductSoldOut(){
+        $books = Book::where('quantity_remain', '=', 0)->get();
+        return view('admin.ListProductSoldOut', compact('books'));
     }
     
     /*
@@ -140,7 +255,7 @@ class AdminController extends Controller
         $order = $bill->orders;
         $user = $bill->users;
         $cart_books = $order->cartBooks;
-        
+
         // calculate total cost for each bill
         $total = 0;
         foreach ($cart_books as $cb){

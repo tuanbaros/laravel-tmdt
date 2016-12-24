@@ -65,12 +65,19 @@ Route::get('cart_item.delete-{id}', 'AdminController@deleteCartItem')->name('car
 Route::get('list.product', 'AdminController@getListProduct');
 Route::get('product.add', 'AdminController@getAddProduct');
 Route::post('product.add', 'AdminController@postAddProduct');
+Route::get('product.edit-{id}', 'AdminController@getEditProduct')->name('product.edit.get');
+Route::post('product.edit-{id}', 'AdminController@postEditProduct')->name('product.edit.post');
 Route::get('product.description-{id}', 'AdminController@productDescription')->name('product.description');
 Route::get('product.delete-{id}', 'AdminController@deleteProduct')->name('product.detele');
 
+// statistic
+Route::get('product.sale', 'AdminController@getListProductSale');
+Route::get('product.sold.out', 'AdminController@getListProductSoldOut');
+Route::get('product.best.selling', 'AdminController@getListProductBestSelling');
 // bill manager
 Route::get('bill.list', 'AdminController@getListBill');
 Route::get('bill.account-{id}', 'AdminController@infoUser')->name('bill.account');
 Route::get('bill.detail-{id}', 'AdminController@detailBill')->name('bill.detail');
 Route::get('bill.change.status', 'AdminController@changeStatus');
 Route::get('bill.delete-{id}', 'AdminController@deleteBill')->name('bill.delete');
+

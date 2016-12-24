@@ -75,7 +75,7 @@
                             <label for="">Giá *</label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="number" name="product_price" step='1' id="product_price" class="form-control" placeholder="Nhập giá sản phẩm" required>
+                            <input type="number" name="price" step='0.01' min="0" id="price" class="form-control" placeholder="Nhập giá sản phẩm" required>
                         </div>
                     </div>
                     <div class="row">
@@ -83,7 +83,7 @@
                             <label for="">Giảm giá *</label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" name="product_code" id="product_code" class="form-control" placeholder="Nhập mã sản phẩm" required>
+                            <input type="number" step="1" min="0" max="100" name="discount_percent" id="discount_percent" class="form-control" placeholder="Nhập % giảm giá" required>
                         </div>
                     </div>
                     <div class="row">
@@ -91,25 +91,26 @@
                             <label for="">Số lượng *</label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="number" name="quantity" id="quantity" step="1" class="form-control" placeholder="Nhập số lượng sản phẩm" required>
+                            <input type="number" name="quantity_remain" min="0" id="quantity_remain" step="1" class="form-control" placeholder="Nhập số lượng sản phẩm" required>
                         </div>
                     </div>
                     <div class="row" style="margin:20px 0px">
                         <center><label for="">Mô tả sản phẩm</label></center>
-                        <textarea name="discription" id="discription" cols="25" rows="10" class="ckeditor"></textarea>
+                        <textarea name="description" id="description" cols="25" rows="10" class="ckeditor"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-sm-5">
                             <label for="">Ngày phát hành *</label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" name="product_color" class="form-control" id="product_color" placeholder="Tên các màu ngăn các nhau bằng dấu ';'" required>
+                            <input type="datetime-local" name="date_releases" class="form-control" id="date_releases" placeholder="Nhập ngày phát hành" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <center><input type="submit" value="Thêm Sách" class="btn btn-primary"></center>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <center><input type="submit" name="product.add" value="Thêm Sách" class="btn btn-primary"></center>
                         </div>
                     </div>
                 </form>

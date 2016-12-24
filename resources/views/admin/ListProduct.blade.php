@@ -49,8 +49,9 @@
                                     <td>{{$book->quantity_remain}}</td>
                                     <td>{{$book->language}}</td>
                                     <td><a href="{{ route('product.description', $book->id) }}"><u>Xem thông tin</u></a></td>
-                                    <td><center><a href="" title="Sửa" style="margin-right: 10%"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <td><center><a href="{{ route('product.edit.get', $book->id) }}" title="Sửa" style="margin-right: 10%"><span class="glyphicon glyphicon-pencil"></span></a>
                                             <a href="{{ route('product.detele', $book->id) }}" title="Xóa" style="margin-right: 10%"><span class="glyphicon glyphicon-trash"></span></a></center></td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
