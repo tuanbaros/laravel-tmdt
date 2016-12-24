@@ -5,19 +5,20 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Bill;
 
 class BillController extends Controller
 {
     public function show($id)
     {
-        $bills = DB::table('bills')
-            ->where('bills.user_id', $id)
+        $bills = Bill::
+            where('bills.user_id', $id)
             ->select('bills.id', 'bills.status', 'bills.created_at as time', 'bills.cart_id')
             ->get();
 
         foreach ($bills as $key => $bill) {
             $cartbooks = DB::table('cart_books')
-                ->where('cart_books.cart_id', $bill->cart_id)
+                ->where('cart_books.order_id', $bill->orders->id)
                 ->join('books', 'cart_books.book_id', '=', 'books.id')
                 ->join('authors', 'books.author_id', '=', 'authors.id')
                 ->select('cart_books.id', 'cart_books.book_id as idBook', 'books.title', 'authors.name as author', 'books.image_url as images', 'books.price as old_price', 'books.new_price as price', 'cart_books.quantity', 'cart_books.created_at as time')

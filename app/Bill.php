@@ -14,7 +14,7 @@ class Bill extends Model
         return $this->belongsTo('App\Cart', 'cart_id');
     }
 
-    public function orders(){
+    public function orders() {
         return $this->hasOne('App\Order');
     }
 }
