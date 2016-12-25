@@ -21,7 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
         //'email' => $faker->unique()->safeEmail,
-        'avatar' => 'http://localhost:8000/image/user.png',
+        'avatar' => 'http://android-samsung.herokuapp.com/image/user.png',
         //'fb_token' => null,
         //'token' => null,
         //'password' => $password ?: $password = bcrypt('secret'),
