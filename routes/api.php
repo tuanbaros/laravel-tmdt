@@ -53,3 +53,25 @@ Route::get('/search/{key}', [
     'as' => 'search',
     'uses' => 'SearchController@search'
 ]);
+
+Route::group(['prefix' => 'user'], function() {
+    Route::post('rate/store', [
+        'as' => 'user.rate.store',
+        'uses' => 'UserController@storeRate'
+    ]);
+
+    Route::post('book', [
+        'as' => 'user.book',
+        'uses' => 'UserController@getBook'
+    ]);
+
+    Route::post('review/store', [
+        'as' => 'user.review.store',
+        'uses' => 'UserController@storeReview'
+    ]);
+
+    Route::post('bill/store', [
+        'as' => 'user.bill.store',
+        'uses' => 'UserController@storeBill'
+    ]);
+});
