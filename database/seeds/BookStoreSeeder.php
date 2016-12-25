@@ -12,17 +12,17 @@ class BookStoreSeeder extends Seeder
     public function run()
     {
         $this->createUserTest();
-        factory(App\User::class, 20)->create();
-        factory(App\CustomerReview::class, 20)->create();
-        factory(App\Cart::class, 20)->create();
-        factory(App\Bill::class, 20)->create();
+        // factory(App\User::class, 20)->create();
+        // factory(App\CustomerReview::class, 20)->create();
+        // factory(App\Cart::class, 20)->create();
+        // factory(App\Bill::class, 20)->create();
         factory(App\Book::class, 500)->create();
-        factory(App\Image::class, 200)->create();
-        factory(App\Author::class, 10)->create();
-        factory(App\CartBook::class, 50)->create();
-        factory(App\Rate::class, 100)->create();
+        // factory(App\Image::class, 200)->create();
+        factory(App\Author::class, 50)->create();
+        // factory(App\CartBook::class, 50)->create();
+        // factory(App\Rate::class, 100)->create();
         $this->fakeCategory();
-        factory(App\Order::class, 20)->create();
+        // factory(App\Order::class, 20)->create();
     }
 
     public function fakeCategory()
@@ -64,6 +64,14 @@ class BookStoreSeeder extends Seeder
             'phone' => $faker->phoneNumber,
             'avatar' => 'http://localhost:8000/image/user.png',
             'token' => 'test'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Tuan',
+            'id_fb' => 1,
+            'address' => $faker->address,
+            'phone' => $faker->phoneNumber,
+            'avatar' => 'http://localhost:8000/image/user.png',
+            'token' => 'tuannt'
         ]);
     }
 }

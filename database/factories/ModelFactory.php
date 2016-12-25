@@ -63,15 +63,15 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
     $new_price = $price - $price * $discount / 100;
     return [
         'title' => rtrim($faker->text(40), '.'),
-        'author_id' => $faker->numberBetween(1, 10),
+        'author_id' => $faker->numberBetween(1, 50),
         'category_id' => $faker->numberBetween(1, 14),
         'price' => $price,
         'new_price' => $new_price,
         'language' => $faker->languageCode,
         'discount_percent' => $discount,
         'description' => $faker->text,
-        'rate_average' => $faker->randomFloat(1, 0, 5),
-        'quantity_selling' => $faker->numberBetween(0, 50),
+        'rate_average' => 0.0,
+        'quantity_selling' => 0,
         'quantity_remain' => $faker->numberBetween(0, 50),
         'date_releases' => $faker->dateTime,
         'image_url' => $faker->imageUrl(222, 320),
