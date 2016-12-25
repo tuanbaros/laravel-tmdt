@@ -19,7 +19,8 @@ class UserController extends Controller
     {
         $data = $request->only('user_id', 'user_token', 'book_id', 'rate');
         $user = User::find($data['user_id']);
-        if ($user && ($user->token == $data['user_token'])) {
+        $book = Book::find($data['book_id']);
+        if ($user && $book && ($user->token == $data['user_token'])) {
             DB::beginTransaction();
             try {
                 $rate = Rate::where([
@@ -33,6 +34,13 @@ class UserController extends Controller
                 }
                 $rate->point = $data['rate'];
                 $rate->save();
+                $rs = Rate::where('book_id', $book->id)->get();
+                $sumRate = 0;
+                foreach ($rs as $key => $r) {
+                    $sumRate += $r->point;
+                }
+                $book->rate_average = $sumRate / count($rs);
+                $book->save();
                 DB::commit();
                 return json_encode(['status' => 'success']);
             } catch (\Exception $e) {

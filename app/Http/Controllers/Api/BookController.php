@@ -50,9 +50,9 @@ class BookController extends Controller
         }
 
         if ($book->quantity_remain > 0) {
-            $book->status = 'Con hang';
+            $book->status = 'Còn hàng';
         } else {
-            $book->status = 'Het hang';
+            $book->status = 'Hết hàng';
         }
 
         $rates = DB::table('rates')
