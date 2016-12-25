@@ -20,18 +20,24 @@ class UserController extends Controller
         $data = $request->only('user_id', 'user_token', 'book_id', 'rate');
         $user = User::find($data['user_id']);
         if ($user && ($user->token == $data['user_token'])) {
-            $rate = Rate::where([
-                'book_id' => $data['book_id'],
-                'user_id' => $data['book_id']
-            ])->first();
-            if (count($rate) <= 0) {
-                $rate = new Rate;
-                $rate->book_id = $data['book_id'];
-                $rate->user_id = $data['user_id'];
+            DB::beginTransaction();
+            try {
+                $rate = Rate::where([
+                    'book_id' => $data['book_id'],
+                    'user_id' => $data['user_id']
+                ])->first();
+                if (count($rate) <= 0) {
+                    $rate = new Rate;
+                    $rate->book_id = $data['book_id'];
+                    $rate->user_id = $data['user_id'];
+                }
+                $rate->point = $data['rate'];
+                $rate->save();
+                DB::commit();
+                return json_encode(['status' => 'success']);
+            } catch (\Exception $e) {
+                DB::rollback();
             }
-            $rate->point = $data['rate'];
-            $rate->save();
-            return json_encode(['status' => 'success']);
         }
         return json_encode(['status' => 'failed']);
     }
@@ -41,12 +47,18 @@ class UserController extends Controller
         $data = $request->only('user_id', 'user_token', 'book_id', 'review');
         $user = User::find($data['user_id']);
         if ($user && ($user->token == $data['user_token'])) {
-            $review = new CustomerReview;
-            $review->book_id = $data['book_id'];
-            $review->user_id = $data['user_id'];
-            $review->content = $data['review'];
-            $review->save();
-            return json_encode(['status' => 'success']);
+            DB::beginTransaction();
+            try {
+                $review = new CustomerReview;
+                $review->book_id = $data['book_id'];
+                $review->user_id = $data['user_id'];
+                $review->content = $data['review'];
+                $review->save();
+                DB::commit();
+                return json_encode(['status' => 'success']);
+            } catch (\Exception $e) {
+                DB::rollback();
+            }
         }
         return json_encode(['status' => 'failed']);
     }
@@ -76,43 +88,48 @@ class UserController extends Controller
                     }
                 }
                 if ($error == 'error') {
-                    //save bill
-                    $bill = new Bill;
-                    $bill->user_id = $u->id;
-                    $bill->status = 'processing';
-                    $bill->name_customer = $user['name'];
-                    $bill->phone = $user['phone'];
-                    $bill->address = $user['address'];
-                    $bill->save();
+                    DB::beginTransaction();
+                    try {
+                        //save bill
+                        $bill = new Bill;
+                        $bill->user_id = $u->id;
+                        $bill->status = 'processing';
+                        $bill->name_customer = $user['name'];
+                        $bill->phone = $user['phone'];
+                        $bill->address = $user['address'];
+                        $bill->save();
 
-                    $order = new Order;
-                    $order->bill_id = $bill->id;
-                    $total = 0;
-                    $order->total_cost = 0;
-                    $order->save();
+                        $order = new Order;
+                        $order->bill_id = $bill->id;
+                        $total = 0;
+                        $order->total_cost = 0;
+                        $order->save();
 
-                    foreach ($carts as $key => $cart) {
-                        $book = Book::find($cart['book_id']);
-                        //save cartbook
-                        $cartbook = new CartBook;
-                        $cartbook->order_id = $order->id;
-                        $cartbook->book_id = $cart['book_id'];
-                        $cartbook->quantity = $cart['quantity'];
+                        foreach ($carts as $key => $cart) {
+                            $book = Book::find($cart['book_id']);
+                            //save cartbook
+                            $cartbook = new CartBook;
+                            $cartbook->order_id = $order->id;
+                            $cartbook->book_id = $cart['book_id'];
+                            $cartbook->quantity = $cart['quantity'];
 
-                        $total += $book->new_price * $cart['quantity'];
+                            $total += $book->new_price * $cart['quantity'];
 
-                        $cartbook->save();
+                            $cartbook->save();
 
-                        $book->quantity_selling += $cart['quantity'];
-                        $book->quantity_remain -= $cart['quantity'];
-                        $book->save();
+                            $book->quantity_selling += $cart['quantity'];
+                            $book->quantity_remain -= $cart['quantity'];
+                            $book->save();
 
+                        }
+
+                        $order->total_cost = $total;
+                        $order->save();
+                        DB::commit();
+                        return json_encode(['status' => 'success']);
+                    } catch (\Exception $e) {
+                        DB::rollback();
                     }
-
-                    $order->total_cost = $total;
-                    $order->save();
-
-                    return json_encode(['status' => 'success']);
                 }
             }
         } catch (\Exception $e) {
