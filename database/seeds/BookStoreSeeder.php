@@ -11,6 +11,7 @@ class BookStoreSeeder extends Seeder
      */
     public function run()
     {
+        $this->createUserTest();
         factory(App\User::class, 20)->create();
         factory(App\CustomerReview::class, 20)->create();
         factory(App\Cart::class, 20)->create();
@@ -51,5 +52,18 @@ class BookStoreSeeder extends Seeder
                 'image_url' => $faker->imageUrl(320, 222)
             ]);
         }
+    }
+
+    public function createUserTest()
+    {
+        $faker = Faker\Factory::create();
+        DB::table('users')->insert([
+            'name' => 'Test',
+            'id_fb' => 1,
+            'address' => $faker->address,
+            'phone' => $faker->phoneNumber,
+            'avatar' => 'http://localhost:8000/image/user.png',
+            'token' => 'test'
+        ]);
     }
 }
