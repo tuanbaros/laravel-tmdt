@@ -62,7 +62,7 @@ class BookStoreSeeder extends Seeder
             'id_fb' => 1,
             'address' => $faker->address,
             'phone' => $faker->phoneNumber,
-            'avatar' => 'http://localhost:8000/image/user.png',
+            'avatar' => 'http://android-samsung.herokuapp.com/image/user.png',
             'token' => 'test'
         ]);
         DB::table('users')->insert([
@@ -70,7 +70,7 @@ class BookStoreSeeder extends Seeder
             'id_fb' => 1,
             'address' => $faker->address,
             'phone' => $faker->phoneNumber,
-            'avatar' => 'http://localhost:8000/image/user.png',
+            'avatar' => 'http://android-samsung.herokuapp.com/image/user.png',
             'token' => 'tuannt'
         ]);
     }
