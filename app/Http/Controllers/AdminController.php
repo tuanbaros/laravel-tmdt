@@ -9,6 +9,7 @@ use App\CartBook;
 use App\Category;
 use App\Image;
 use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -68,7 +69,7 @@ class AdminController extends Controller
             $cart_books = $cart->cartBooks;
             $total_cost = $cart->total_cost;
 
-            return view('admin.Cart',compact('total_cost', 'cart_books'));
+            return view('admin.Cart', compact('total_cost', 'cart_books'));
         }else{
             echo "User chưa có giỏ hàng!";
         }
@@ -281,6 +282,16 @@ class AdminController extends Controller
         if ($user_id){
             $route = "account.bill-$user_id";
             return redirect($route);
+        }
+        if ($status == 'cancel') {
+            foreach ($bill->orders->cartbooks as $key => $cartbook) {
+                $book = $cartbook->books;
+                $book->quantity_selling -= $cartbook->quantity;
+                $book->quantity_remain += $cartbook->quantity;
+                $book->save();
+                $cartbook->delete();
+            }
+            $bill->orders->delete();
         }
         return redirect('bill.list');
     }

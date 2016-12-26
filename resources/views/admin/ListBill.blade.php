@@ -47,6 +47,7 @@
                                             <a href="{{ route('bill.detail', $bill->id)}}" class= "btn btn-default">Xem</a></center></td>
 
                                 <td><center>{{$bill->status}}
+                                        @if ($bill->status == 'processing' || $bill->status == 'shipping')
                                         <form action="bill.change.status" method="get">
                                             <input type="hidden" value="{{$bill->id}}" name="bill_id"/>
                                             @yield('add_input')
@@ -58,11 +59,14 @@
                                             </select>
                                             <input type="submit" value="Change" class="btn btn-primary">
                                         </form>
-
+                                        @endif
                                     </center></td>
                                 <td><center><?php $date=explode(' ', $bill->updated_at); echo $date[0]; ?></center></td>
-                                <td><center><a class="btn btn-default" href="{{ route('bill.delete', $bill->id) }}">Xóa</a>&nbsp&nbsp<a class="btn btn-default" href="">In</a></center></td>
-
+                                @if ($bill->status == 'completed' || $bill->status == 'cancel')
+                                <td><center><a class="btn btn-default" href="{{ route('bill.delete', $bill->id) }}">Xóa</a></td>
+                                @else
+                                <td></td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
