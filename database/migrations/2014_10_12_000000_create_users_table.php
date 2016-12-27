@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('id_fb');
+            $table->string('id_fb')->unique();
             //$table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('address')->nullable();
@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('fb_token')->nullable();
             $table->string('token')->nullable();
-            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }
