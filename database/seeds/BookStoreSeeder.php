@@ -67,7 +67,7 @@ class BookStoreSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'Tuan',
-            'id_fb' => 1,
+            'id_fb' => 2,
             'address' => $faker->address,
             'phone' => $faker->phoneNumber,
             'avatar' => 'http://android-samsung.herokuapp.com/image/user.png',
