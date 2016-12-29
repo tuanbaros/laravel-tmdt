@@ -293,13 +293,13 @@ class AdminController extends Controller
             }
             $bill->orders->delete();
         }
-        return redirect('bill.list');
+        return redirect()->back();
     }
 
     /* delete bill */
     public function deleteBill($id){
         $bill = Bill::find($id);
         $bill->delete();
-        return redirect('bill.list');
+        return redirect()->back();
     }
 }
